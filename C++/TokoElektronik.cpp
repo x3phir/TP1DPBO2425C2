@@ -99,7 +99,7 @@ public:
     void tambahElektronik() {
         cout << "\n--- TAMBAH ELEKTRONIK BARU ---" << endl;
         
-        cin.ignore(); // Clear input buffer
+        cin.ignore(); // Clear input buffer 
         
         string nama, merk;
         double harga;

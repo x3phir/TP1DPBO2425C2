@@ -1,179 +1,105 @@
-TP1DPBO2425C1 - Sistem Toko Elektronik
-Janji
-Saya [Nama Lengkap] dengan NIM [NIM] mengerjakan TP1 dalam mata kuliah Desain dan Pemrograman Berorientasi Objek untuk keberkahanNya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin.
-Penjelasan Program
-Deskripsi
-Program ini adalah sistem manajemen toko elektronik yang dibuat menggunakan konsep Object-Oriented Programming (OOP) dalam 4 bahasa pemrograman: Java, Python, C++, dan PHP. Program mengelola data produk elektronik dengan operasi CRUD (Create, Read, Update, Delete) menggunakan array/list of objects.
-Desain Class
-Class Elektronik
-Class utama yang merepresentasikan produk elektronik dengan 4 atribut:
-Atribut:
+# TP1DPBO2425C1 – Sistem Toko Elektronik
 
-nama (String): Nama produk elektronik (contoh: "Laptop", "HP Android")
-merk (String): Merek/brand produk (contoh: "ASUS", "Samsung")
-harga (Double/Float): Harga produk dalam rupiah
-stok (Integer): Jumlah stok yang tersedia
+## Janji
+Saya **Harri Supriadi** dengan **NIM 2405547** mengerjakan TP1 dalam mata kuliah **Desain dan Pemrograman Berorientasi Objek**. Demi keberkahan-Nya, saya menyatakan **tidak melakukan kecurangan** sebagaimana yang telah dispesifikasikan.  
+_Aamiin._
 
-Method:
+---
 
-Constructor: Menginisialisasi objek elektronik dengan 4 parameter
-Getter methods: getNama(), getMerk(), getHarga(), getStok()
-Setter methods: setNama(), setMerk(), setHarga(), setStok()
-tampilkanInfo(): Menampilkan informasi elektronik (CLI version)
-toArray() & fromArray(): Konversi untuk penyimpanan session (PHP version)
+## 📌 Deskripsi Program
+Program ini adalah **sistem manajemen toko elektronik** yang dibuat dengan menerapkan konsep **Object-Oriented Programming (OOP)** dalam **4 bahasa pemrograman**:  
 
-Class TokoElektronik
-Class untuk mengelola koleksi objek elektronik:
-Atribut:
+- Java  
+- Python  
+- C++  
+- PHP (Web Version)  
 
-daftarElektronik: Array/List yang menyimpan multiple objects dari class Elektronik
+Program ini mengelola data produk elektronik dengan operasi **CRUD** (Create, Read, Update, Delete) menggunakan **array/list of objects**.
 
-Method:
+---
 
-tambahElektronik(): Membuat object baru dan menambah ke array
-tampilkanSemuaElektronik(): Iterasi array dan tampilkan semua objects
-editElektronik(): Mencari object berdasarkan index dan mengubah atributnya
-hapusElektronik(): Menghapus object dari array berdasarkan index
-jalankan(): Method utama untuk menjalankan program (CLI version)
-saveToSession() & loadFromSession(): Persistensi array of objects (PHP version)
+## 🏗️ Desain Class
 
-Implementasi per Bahasa
-Java, Python, C++ (CLI Version)
+### Class `Elektronik`
+Merepresentasikan produk elektronik.  
 
-Interface berbasis console/terminal dengan menu pilihan
-Input menggunakan Scanner/input()/cin dari keyboard
-Output ditampilkan dalam format tabel di terminal
-Data disimpan dalam array/vector/list of objects di memory
-Loop program hingga user memilih keluar
+**Atribut:**
+- `nama` (String) → Nama produk (contoh: "Laptop", "HP Android")  
+- `merk` (String) → Merek/brand produk (contoh: "ASUS", "Samsung")  
+- `harga` (Double/Float) → Harga produk (Rp)  
+- `stok` (Integer) → Jumlah stok tersedia  
 
-PHP (Web Version)
+**Method:**
+- `Constructor` → Inisialisasi objek dengan 4 parameter  
+- Getter: `getNama()`, `getMerk()`, `getHarga()`, `getStok()`  
+- Setter: `setNama()`, `setMerk()`, `setHarga()`, `setStok()`  
+- `tampilkanInfo()` → Menampilkan informasi elektronik (CLI version)  
+- `toArray()` & `fromArray()` → Konversi penyimpanan session (PHP version)  
 
-Interface berbasis web dengan HTML forms untuk input
-Input menggunakan HTML form elements (text input, number input)
-Output ditampilkan dalam HTML table
-Data disimpan dalam PHP Session sebagai array of objects
-Menggunakan POST method untuk semua operasi CRUD
+---
 
-Flow Program
-CLI Version (Java, Python, C++)
+### Class `TokoElektronik`
+Mengelola koleksi objek `Elektronik`.  
 
-Inisialisasi
+**Atribut:**
+- `daftarElektronik` → Array/List of Objects  
 
-Membuat object TokoElektronik
-Menambah 4 object elektronik sebagai data awal ke dalam array
+**Method:**
+- `tambahElektronik()` → Tambah data elektronik baru  
+- `tampilkanSemuaElektronik()` → Menampilkan semua data  
+- `editElektronik()` → Edit data berdasarkan index  
+- `hapusElektronik()` → Hapus data berdasarkan index  
+- `jalankan()` → Method utama (CLI version)  
+- `saveToSession()` & `loadFromSession()` → Persistensi data (PHP version)  
 
+---
 
-Menu Loop
+## ⚙️ Implementasi per Bahasa
 
-Tampilkan menu dengan 5 pilihan
-User input pilihan menu
-Panggil method sesuai pilihan
+### CLI Version (Java, Python, C++)
+- Antarmuka berbasis **console/terminal**  
+- Menu pilihan CRUD  
+- Input: `Scanner` / `input()` / `cin`  
+- Output: Tabel di terminal  
+- Data: **Array/List/Vector of Objects**  
+- Program berjalan dalam loop hingga user keluar  
 
+### Web Version (PHP)
+- Antarmuka berbasis **HTML + PHP**  
+- Data disimpan dalam **PHP Session**  
+- Operasi CRUD menggunakan form & POST method  
+- Fitur:
+  - Form tambah data
+  - Tabel data produk
+  - Edit/Hapus data per row
+  - Dynamic form edit (JavaScript)
+  - Server-side validation  
 
-Operasi CRUD pada Array of Objects
+---
 
-Create: Input data → Buat object Elektronik baru → Add ke array
-Read: Loop array → Panggil method tampilkanInfo() setiap object
-Update: Input index → Akses object di array[index] → Ubah atribut via setter
-Delete: Input index → Hapus object dari array di posisi index
+## 🔄 Flow Program
 
+### CLI Version
+1. Inisialisasi `TokoElektronik` + tambah 4 data awal  
+2. Loop Menu (Create, Read, Update, Delete, Exit)  
+3. Validasi input & error handling  
 
-Validasi & Error Handling
+### PHP Web Version
+1. Load data dari session (jika kosong → inisialisasi 4 data awal)  
+2. Form submit via POST  
+3. Operasi CRUD dengan update session  
+4. Data ditampilkan dalam tabel HTML  
 
-Validasi input sesuai tipe data
-Handling index out of bounds
-Konfirmasi sebelum delete
+---
 
+## 🧩 Konsep OOP yang Digunakan
+- **Class & Object** → `Elektronik` sebagai blueprint, multi-instance  
+- **Encapsulation** → Atribut private, akses via getter/setter  
+- **Array/List of Objects** → Manajemen koleksi produk  
 
-
-Web Version (PHP)
-
-Session Management
-
-Load array of objects dari session
-Jika kosong, inisialisasi dengan 4 objects
-
-
-Form Processing
-
-HTML form submit via POST
-Server-side validation
-Operasi pada array of objects
-
-
-CRUD Operations
-
-Create: POST data → Buat object → Push ke array → Save session
-Read: Loop array objects → Tampilkan dalam HTML table
-Update: POST index & data → Edit object di array[index] → Save session
-Delete: POST index → Unset array[index] → Reindex array → Save session
+---
 
 
-Web Interface
-
-Form untuk tambah data baru
-Table untuk display semua objects
-Button edit/hapus per row
-Dynamic form edit dengan JavaScript
-
-
-
-Konsep OOP yang Digunakan
-
-Class & Object:
-
-Elektronik sebagai blueprint
-Multiple instances/objects dari class yang sama
-
-
-Encapsulation:
-
-Atribut private untuk data hiding
-Public methods sebagai interface
-
-
-Array/List of Objects:
-
-Struktur data utama: Elektronik[] daftarElektronik
-Operasi kolektif pada multiple objects
-Manajemen lifecycle objects dalam collection
-
-
-
-Struktur Program
-TP1DPBO2425C1/
-├── CPP/
-│   └── toko_elektronik.cpp
-├── Java/
-│   └── TokoElektronik.java
-├── Python/
-│   └── toko_elektronik.py
-├── PHP/
-│   └── toko_elektronik.php
-├── Dokumentasi/
-│   ├── output_cpp.png
-│   ├── output_java.png  
-│   ├── output_python.png
-│   ├── output_php_web.png
-│   └── demo_program.mp4
-└── README.md
-Cara Menjalankan Program
-Java
-bashcd Java
-javac TokoElektronik.java
-java TokoElektronik
-Python
-bashcd Python
-python toko_elektronik.py
-C++
-bashcd CPP
-g++ -o toko_elektronik toko_elektronik.cpp
-./toko_elektronik
-PHP (Web)
-bash# 1. Start web server (XAMPP/WAMP/MAMP)
-# 2. Copy file ke folder htdocs/www
-# 3. Akses via browser:
-http://localhost/PHP/toko_elektronik.php
 ## Dokumentasi Output
 
 ### 1. Java Output

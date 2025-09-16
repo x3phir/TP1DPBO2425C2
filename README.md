@@ -179,9 +179,6 @@ Program C++ menggunakan vector<Elektronik> untuk menyimpan objects. Interface co
 #### Operasi CRUD - Delete (Hapus Data)
 ![PHP Delete](documentations/delete-php.png)
 
-#### Update Data Berhasil
-![PHP Update](documentations/update-php.png)
-
 Program PHP Web menampilkan interface HTML dengan form input dan table output. Menggunakan session untuk menyimpan array of objects. Features:
 - HTML form untuk input data baru
 - HTML table untuk menampilkan semua objects

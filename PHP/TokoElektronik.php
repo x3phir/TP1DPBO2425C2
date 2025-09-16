@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,28 +11,28 @@
             margin: 20px;
             background-color: #f5f5f5;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
             background-color: white;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
+
         h1 {
             text-align: center;
             color: #333;
             margin-bottom: 30px;
         }
-        
+
         h2 {
             color: #555;
             border-bottom: 2px solid #ddd;
             padding-bottom: 5px;
         }
-        
+
         .form-box {
             background-color: #fafafa;
             padding: 20px;
@@ -39,25 +40,26 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-        
+
         .form-group {
             margin-bottom: 15px;
         }
-        
+
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
-        
-        input[type="text"], input[type="number"] {
+
+        input[type="text"],
+        input[type="number"] {
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 3px;
             font-size: 14px;
         }
-        
+
         button {
             background-color: #007bff;
             color: white;
@@ -67,177 +69,207 @@
             cursor: pointer;
             font-size: 14px;
         }
-        
+
         button:hover {
             background-color: #0056b3;
         }
-        
+
         .btn-edit {
             background-color: #28a745;
             padding: 5px 10px;
             font-size: 12px;
         }
-        
+
         .btn-delete {
             background-color: #dc3545;
             padding: 5px 10px;
             font-size: 12px;
         }
-        
+
         .btn-edit:hover {
             background-color: #218838;
         }
-        
+
         .btn-delete:hover {
             background-color: #c82333;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
         }
-        
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
-        
+
         th {
             background-color: #f8f9fa;
             padding: 10px;
             text-align: left;
         }
-        
+
         td {
             padding: 8px;
         }
-        
+
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        
+
         .message {
             padding: 10px;
             margin: 10px 0;
             border-radius: 3px;
         }
-        
+
         .success {
             background-color: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
-        
+
         .error {
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-        
+
         .center {
             text-align: center;
         }
-        
+
         #editForm {
             display: none;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Sistem Toko Elektronik</h1>
-        
+
         <?php
         session_start();
 
         // Class Elektronik
-        class Elektronik {
+        class Elektronik
+        {
             private $nama;
             private $merk;
             private $harga;
             private $stok;
-            
-            public function __construct($nama, $merk, $harga, $stok) {
+            private $gambar;
+
+            public function __construct($nama, $merk, $harga, $stok, $gambar)
+            {
                 $this->nama = $nama;
                 $this->merk = $merk;
                 $this->harga = $harga;
                 $this->stok = $stok;
+                $this->gambar = $gambar;
             }
-            
-            public function getNama() {
+
+            public function getNama()
+            {
                 return $this->nama;
             }
-            
-            public function getMerk() {
+
+            public function getMerk()
+            {
                 return $this->merk;
             }
-            
-            public function getHarga() {
+
+            public function getHarga()
+            {
                 return $this->harga;
             }
-            
-            public function getStok() {
+
+            public function getStok()
+            {
                 return $this->stok;
             }
-            
-            public function setNama($nama) {
+
+            public function setNama($nama)
+            {
                 $this->nama = $nama;
             }
-            
-            public function setMerk($merk) {
+
+            public function setMerk($merk)
+            {
                 $this->merk = $merk;
             }
-            
-            public function setHarga($harga) {
+
+            public function setHarga($harga)
+            {
                 $this->harga = $harga;
             }
-            
-            public function setStok($stok) {
+
+            public function setStok($stok)
+            {
                 $this->stok = $stok;
             }
-            
-            public function toArray() {
+
+            public function getGambar()
+            {
+                return $this->gambar;
+            }
+            public function setGambar($gambar)
+            {
+                $this->gambar = $gambar;
+            }
+            public function toArray()
+            {
                 return [
                     'nama' => $this->nama,
                     'merk' => $this->merk,
                     'harga' => $this->harga,
-                    'stok' => $this->stok
+                    'stok' => $this->stok,
+                    'gambar' => $this->gambar
                 ];
             }
-            
-            public static function fromArray($data) {
-                return new self($data['nama'], $data['merk'], $data['harga'], $data['stok']);
+            public static function fromArray($data)
+            {
+                return new self($data['nama'], $data['merk'], $data['harga'], $data['stok'], $data['gambar'] ?? '');
             }
         }
 
         // Class TokoElektronik
-        class TokoElektronik {
+        class TokoElektronik
+        {
             private $daftarElektronik = [];
-            
-            public function __construct() {
+
+            public function __construct()
+            {
                 $this->loadFromSession();
                 if (empty($this->daftarElektronik)) {
                     $this->tambahDataAwal();
                 }
             }
-            
-            private function tambahDataAwal() {
+
+            private function tambahDataAwal()
+            {
                 $this->daftarElektronik[] = new Elektronik("Laptop", "ASUS", 8000000, 5);
                 $this->daftarElektronik[] = new Elektronik("HP Android", "Samsung", 3000000, 10);
                 $this->daftarElektronik[] = new Elektronik("TV LED", "LG", 5000000, 3);
                 $this->daftarElektronik[] = new Elektronik("Speaker", "JBL", 800000, 8);
                 $this->saveToSession();
             }
-            
-            private function saveToSession() {
+
+            private function saveToSession()
+            {
                 $data = [];
                 foreach ($this->daftarElektronik as $elektronik) {
                     $data[] = $elektronik->toArray();
                 }
                 $_SESSION['elektronik_data'] = $data;
             }
-            
-            private function loadFromSession() {
+
+            private function loadFromSession()
+            {
                 if (isset($_SESSION['elektronik_data'])) {
                     $this->daftarElektronik = [];
                     foreach ($_SESSION['elektronik_data'] as $data) {
@@ -245,32 +277,42 @@
                     }
                 }
             }
-            
-            public function tambahElektronik($nama, $merk, $harga, $stok) {
-                $elektronikBaru = new Elektronik($nama, $merk, $harga, $stok);
+
+            public function tambahElektronik($nama, $merk, $harga, $stok, $gambar)
+            {
+                $elektronikBaru = new Elektronik($nama, $merk, $harga, $stok, $gambar);
                 $this->daftarElektronik[] = $elektronikBaru;
                 $this->saveToSession();
                 return "Data elektronik berhasil ditambahkan!";
             }
-            
-            public function getDaftarElektronik() {
+
+            public function getDaftarElektronik()
+            {
                 return $this->daftarElektronik;
             }
-            
-            public function editElektronik($index, $nama, $merk, $harga, $stok) {
+
+            public function editElektronik($index, $nama, $merk, $harga, $stok, $gambar = null)
+            {
                 if (isset($this->daftarElektronik[$index])) {
                     $elektronik = $this->daftarElektronik[$index];
-                    if (!empty($nama)) $elektronik->setNama($nama);
-                    if (!empty($merk)) $elektronik->setMerk($merk);
-                    if ($harga > 0) $elektronik->setHarga($harga);
-                    if ($stok >= 0) $elektronik->setStok($stok);
+                    if (!empty($nama))
+                        $elektronik->setNama($nama);
+                    if (!empty($merk))
+                        $elektronik->setMerk($merk);
+                    if ($harga > 0)
+                        $elektronik->setHarga($harga);
+                    if ($stok >= 0)
+                        $elektronik->setStok($stok);
+                    if ($gambar)
+                        $elektronik->setGambar($gambar);
                     $this->saveToSession();
                     return "Data berhasil diupdate!";
                 }
                 return "Data tidak ditemukan!";
             }
-            
-            public function hapusElektronik($index) {
+
+            public function hapusElektronik($index)
+            {
                 if (isset($this->daftarElektronik[$index])) {
                     $nama = $this->daftarElektronik[$index]->getNama();
                     unset($this->daftarElektronik[$index]);
@@ -288,45 +330,65 @@
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $action = $_POST['action'];
-            
             try {
                 switch ($action) {
                     case 'tambah':
-                        if (!empty($_POST['nama']) && !empty($_POST['merk']) && 
-                            !empty($_POST['harga']) && !empty($_POST['stok'])) {
-                            
+                        if (
+                            !empty($_POST['nama']) && !empty($_POST['merk']) &&
+                            !empty($_POST['harga']) && !empty($_POST['stok'])
+                        ) {
                             $nama = trim($_POST['nama']);
                             $merk = trim($_POST['merk']);
-                            $harga = (float)$_POST['harga'];
-                            $stok = (int)$_POST['stok'];
-                            
-                            if ($harga > 0 && $stok >= 0) {
-                                $message = $toko->tambahElektronik($nama, $merk, $harga, $stok);
+                            $harga = (float) $_POST['harga'];
+                            $stok = (int) $_POST['stok'];
+                            $gambarPath = '';
+                            if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
+                                $uploadDir = 'uploads/';
+                                if (!is_dir($uploadDir)) {
+                                    mkdir($uploadDir);
+                                }
+                                $filename = time() . '_' . basename($_FILES['gambar']['name']);
+                                $targetPath = $uploadDir . $filename;
+                                if (move_uploaded_file($_FILES['gambar']['tmp_name'], $targetPath)) {
+                                    $gambarPath = $targetPath;
+                                }
+                            }
+                            if ($harga > 0 && $stok >= 0 && $gambarPath) {
+                                $message = $toko->tambahElektronik($nama, $merk, $harga, $stok, $gambarPath);
                             } else {
-                                $error = "Harga harus lebih dari 0 dan stok tidak boleh negatif!";
+                                $error = "Harga harus > 0, stok >= 0, dan gambar wajib diupload!";
                             }
                         } else {
                             $error = "Semua field harus diisi!";
                         }
                         break;
-                    
                     case 'edit':
-                        $index = (int)$_POST['edit_index'];
+                        $index = (int) $_POST['edit_index'];
                         $nama = trim($_POST['edit_nama']);
                         $merk = trim($_POST['edit_merk']);
-                        $harga = (float)$_POST['edit_harga'];
-                        $stok = (int)$_POST['edit_stok'];
-                        
-                        $result = $toko->editElektronik($index, $nama, $merk, $harga, $stok);
+                        $harga = (float) $_POST['edit_harga'];
+                        $stok = (int) $_POST['edit_stok'];
+                        $gambarPath = null;
+                        if (isset($_FILES['edit_gambar']) && $_FILES['edit_gambar']['error'] === UPLOAD_ERR_OK) {
+                            $uploadDir = 'uploads/';
+                            if (!is_dir($uploadDir)) {
+                                mkdir($uploadDir);
+                            }
+                            $filename = time() . '_' . basename($_FILES['edit_gambar']['name']);
+                            $targetPath = $uploadDir . $filename;
+                            if (move_uploaded_file($_FILES['edit_gambar']['tmp_name'], $targetPath)) {
+                                $gambarPath = $targetPath;
+                            }
+                        }
+                        $result = $toko->editElektronik($index, $nama, $merk, $harga, $stok, $gambarPath);
                         if (strpos($result, 'berhasil') !== false) {
                             $message = $result;
                         } else {
                             $error = $result;
                         }
                         break;
-                    
                     case 'hapus':
-                        $index = (int)$_POST['hapus_index'];
+                        $index = (int) $_POST['hapus_index'];
                         $result = $toko->hapusElektronik($index);
                         if (strpos($result, 'berhasil') !== false) {
                             $message = $result;
@@ -351,29 +413,33 @@
         <!-- Form Tambah -->
         <div class="form-box">
             <h2>Tambah Elektronik Baru</h2>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="tambah">
-                
+
                 <div class="form-group">
                     <label>Nama Elektronik:</label>
                     <input type="text" name="nama" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Merk:</label>
                     <input type="text" name="merk" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Harga:</label>
                     <input type="number" name="harga" min="1" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Stok:</label>
                     <input type="number" name="stok" min="0" required>
                 </div>
-                
+
+                <div class="form-group">
+                    <label>Gambar:</label>
+                    <input type="file" name="gambar" accept="image/*" required>
+                </div>
                 <button type="submit">Tambah</button>
             </form>
         </div>
@@ -390,29 +456,35 @@
                     <th>Merk</th>
                     <th>Harga</th>
                     <th>Stok</th>
+                    <th>Gambar</th>
                     <th>Aksi</th>
                 </tr>
                 <?php foreach ($toko->getDaftarElektronik() as $index => $elektronik): ?>
-                <tr>
-                    <td><?= $index + 1 ?></td>
-                    <td><?= $elektronik->getNama() ?></td>
-                    <td><?= $elektronik->getMerk() ?></td>
-                    <td>Rp <?= number_format($elektronik->getHarga(), 0, ',', '.') ?></td>
-                    <td><?= $elektronik->getStok() ?></td>
-                    <td>
-                        <button type="button" class="btn-edit" 
+                    <tr>
+                        <td><?= $index + 1 ?></td>
+                        <td><?= $elektronik->getNama() ?></td>
+                        <td><?= $elektronik->getMerk() ?></td>
+                        <td>Rp <?= number_format($elektronik->getHarga(), 0, ',', '.') ?></td>
+                        <td><?= $elektronik->getStok() ?></td>
+                        <td>
+                            <?php if ($elektronik->getGambar()): ?>
+                                <img src="<?= htmlspecialchars($elektronik->getGambar()) ?>" alt="Gambar Elektronik"
+                                    style="max-width:100px;">
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <button type="button" class="btn-edit"
                                 onclick="showEdit(<?= $index ?>, '<?= $elektronik->getNama() ?>', '<?= $elektronik->getMerk() ?>', <?= $elektronik->getHarga() ?>, <?= $elektronik->getStok() ?>)">
-                            Edit
-                        </button>
-                        
-                        <form method="POST" style="display: inline;" 
-                              onsubmit="return confirm('Yakin hapus <?= $elektronik->getNama() ?>?')">
-                            <input type="hidden" name="action" value="hapus">
-                            <input type="hidden" name="hapus_index" value="<?= $index ?>">
-                            <button type="submit" class="btn-delete">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
+                                Edit
+                            </button>
+                            <form method="POST" style="display: inline;"
+                                onsubmit="return confirm('Yakin hapus <?= $elektronik->getNama() ?>?')">
+                                <input type="hidden" name="action" value="hapus">
+                                <input type="hidden" name="hapus_index" value="<?= $index ?>">
+                                <button type="submit" class="btn-delete">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </table>
             <p><strong>Total: <?= count($toko->getDaftarElektronik()) ?> item</strong></p>
@@ -421,30 +493,29 @@
         <!-- Form Edit -->
         <div class="form-box" id="editForm">
             <h2>Edit Elektronik</h2>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" id="edit_index" name="edit_index">
-                
                 <div class="form-group">
                     <label>Nama Elektronik:</label>
                     <input type="text" id="edit_nama" name="edit_nama">
                 </div>
-                
                 <div class="form-group">
                     <label>Merk:</label>
                     <input type="text" id="edit_merk" name="edit_merk">
                 </div>
-                
                 <div class="form-group">
                     <label>Harga:</label>
                     <input type="number" id="edit_harga" name="edit_harga" min="1">
                 </div>
-                
                 <div class="form-group">
                     <label>Stok:</label>
                     <input type="number" id="edit_stok" name="edit_stok" min="0">
                 </div>
-                
+                <div class="form-group">
+                    <label>Ganti Gambar (opsional):</label>
+                    <input type="file" name="edit_gambar" accept="image/*">
+                </div>
                 <button type="submit">Update</button>
                 <button type="button" onclick="hideEdit()">Batal</button>
             </form>
@@ -460,10 +531,11 @@
             document.getElementById('edit_stok').value = stok;
             document.getElementById('editForm').style.display = 'block';
         }
-        
+
         function hideEdit() {
             document.getElementById('editForm').style.display = 'none';
         }
     </script>
 </body>
+
 </html>
